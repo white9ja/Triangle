@@ -1,0 +1,133 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+    <!--/#header-->
+
+
+    <!--/#action-->
+
+    <section id="portfolio-information" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <img src="/static/images/new/rrrr.jpg"  class="card border-1 shadow-sm" alt="" id="md-imgg">
+                </div>
+                <div class="col-sm-6">
+                     <div class="card border-1 shadow-sm" style="border: 1px solid #d29948; padding:10px 30px; border-radius:4px; margin-top: 10px">
+                       {% with messages= get_flashed_messages(with_categories=true) %}
+                                    {% if messages %}
+                                         {% for category, message in messages %}
+                                      <div class="alert alert border-1 shadow-sm" {{category}}"  style=" color:#000000;border:1px solid  #e0ebeb; display: flex; font-size: 15px; text-align:center;padding-left: 40px; font-family: system-ui; font-weight: 100">
+                                        
+                                           {{message}}
+                                         </div>
+                                      {% endfor %}
+                                    {% endif %}
+                               {% endwith %}
+                        <h2 style="color:#d29948; ma">Update-Bio Data</h2>
+                         <form  method="post" action=""  accept-charset="UTF-8" enctype="multipart/form-data">
+                            {{ form.hidden_tag() }}
+                  
+                     <div class="form-group">
+
+                            {{ form.about.label(class="form-label", style="font-size:13px; ") }}
+                                {% if form.about.errors %}
+                                {{ form.about(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.about.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.about(class="form-control",  autocomplete="off", id="md-phone") }} 
+                            {% endif %}                   
+                    </div>
+                            
+                           
+                             <div class="row"  id="md-grid-container" style="margin-top: -7px"> 
+                                 <div class="form-group"  id="md-grid-left">
+                          {{ form.religion.label(class="form-label", style="font-size:13px; ") }}
+                                {% if form.religion.errors %}
+                                {{ form.religion(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.religion.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.religion(class="form-control",  autocomplete="off", id="md-phone") }} 
+                            {% endif %}             
+                                 </div>
+                                <div class="form-group"  id="md-grid-right" >
+                             {{ form.marital_status.label(class="form-label", style="font-size:13px; ") }}
+                                {% if form.marital_status.errors %}
+                                {{ form.marital_status(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.marital_status.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.marital_status(class="form-control",  autocomplete="off", id="md-phone") }} 
+                            {% endif %}         
+                                </div> 
+                            </div>
+                         
+                             <div class="row"  id="md-grid-container" style="margin-top: -7px"> 
+                                 <div class="form-group"  id="md-grid-left">
+                          {{ form.education.label(class="form-label", style="font-size:13px; ") }}
+                                {% if form.education.errors %}
+                                {{ form.education(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.education.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.education(class="form-control",  autocomplete="off", id="md-phone") }} 
+                            {% endif %}         
+                                 </div>
+                                <div class="form-group"  id="md-grid-right">
+                            {{ form.city.label(class="form-label", style="font-size:13px; ") }}
+                                {% if form.city.errors %}
+                                {{ form.city(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.city.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.city(class="form-control",  autocomplete="off", id="md-phone") }} 
+                            {% endif %}         
+                                </div> 
+                            </div>
+                            <div class="form-group" style="margin-top: -10px">
+                            {{ form.address.label(class="form-label", style="font-size:13px; ") }}
+                                {% if form.address.errors %}
+                                {{ form.address(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.address.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.address(class="form-control",  autocomplete="off", id="md-phone") }} 
+                            {% endif %}         
+                            </div>             
+                            <div class="form-group">
+                                {{ form.submit(class="btn btn-submit", autocomplete="off", id="md-phone") }} 
+                            </div>
+                            
+                          
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!--/#portfolio-information-->
+
+
+              
+            </div>
+        </div>
+   {% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+    <!--/#header-->
+
+
+    <!--/#action-->
+
+    <section id="portfolio-information" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <img src="{{image}}"  class="card border-1 shadow-sm" alt="" id="md-imgg">
+                   
+                </div>
+                  {% for bio in bios %}
+                <div class="col-sm-6">
+                    <div class="project-name overflow">
+                        <h2 class="bold">{{bio.name}}</h2>
+                        <ul class="nav navbar-nav navbar-default">
+                   <!--          <li><a href="#"><i class="fa fa-clock-o"></i>{{bio.created_at}}</a></li> -->
+                           
+                        </ul>
+                    </div>
+                    <div class="project-info overflow">
+                        <div style="display: flex">
+                            <h3>Profile Info  </h3>
+                           
+                        </div>
+                        <p>{{bio.about}}</p>
+                        <ul class="elements">
+                            <li><i class="fa fa-angle-right"></i>{{bio.marital_status}}</li>
+                            <li><i class="fa fa-angle-right"></i> {{bio.city}} Nigeria</li>
+                            <li><i class="fa fa-angle-right"></i>{{bio.religion}}</li>
+                        </ul>
+                    </div>
+                        {% endfor %}
+
+                    {% if skills.count() > 0 %}
+                      
+                    <div class="skills overflow">
+                       
+                            <h3>Skills / Subjects: </h3>
+                              {% for skill in skills %}
+                        <ul class="nav navbar-nav navbar-default">
+                            <li ><a style="font-size: 15px"><i class="fa fa-check-square"></i> {{skill.skill_name}}</a></li>
+                           
+                        </ul>
+                         {% endfor %}
+                    </div>
+                       
+                    {% else %}
+                    <div class="live-preview">
+                        <a href="{{url_for('skill')}}" class="btn btn-common uppercase">Add Skill / Subjects </a>
+                    </div>
+                    {% endif %}
+                    <div class="client overflow">
+                        <h3>Available for online tutelage:</h3>
+                       
+                    </div>
+                    <div class="live-preview">
+                        <a href="#" class="btn btn-common capitalize" style="border-color:#0066ff; padding: 5px 10px; margin: 5px"> <img src="/static/images/new/zoom.jpg" style="width:30px; height:30px"> Zoom online </a>
+                        <a href="#" class="btn btn-common capitalize" style="border-color:green; padding: 5px 10px; margin: 5px"> <img src="/static/images/new/hang.png" style="width:29px; height:29px"> Google meeting</a>
+                        
+                    </div>
+                     <div class="live-preview">
+                        <a href="#" class="btn btn-common capitalize" style="border-color:#d29948; padding: 10px 10px; margin: 5px"> <img src="/static/images/new/notification.png" style="width:20px; height:20px"> Request service </a>
+                       
+                        
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </section>
+     <!--/#portfolio-information-->
+
+
+              
+            </div>
+        </div>
+   {% endblock %}

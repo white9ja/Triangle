@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+     {% if title %}
+    <title>Triangle | {{title}}</title>
+     {% else %}
+     <title>Triangle | Welcome</title>
+     {% endif %}    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/animate.min.css" rel="stylesheet"> 
+  <!--   <link href="/static/css/lightbox.css" rel="stylesheet">  -->
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/responsive.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+	    <script src="js/html5shiv.js"></script>
+	    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+{{ moment.include_moment() }}
+    <style type="text/css">
+     #md-imgg{
+            width:450px;
+            height:450px;
+            object-fit:fill;
+            border:0px solid #D29948;
+            border-radius:100%;
+        }
+        #md-slide{
+            display: flex;
+            justify-content: space-between;
+        }
+        #md-search{
+            margin-top: -50px
+        }
+
+    #recent-container{
+        justify-content: space-around;
+        padding:10px 20px;
+        align-items: center;
+        align-self: center;
+        margin-left: 20px;
+    }
+    #recent-box{
+       border: 1px solid #d29948;
+       border-radius:4px;
+       padding-top: -5px;
+       width:330px;margin:5px 10px;
+    }
+    #md-cam{
+     position: relative;
+     top:-100px; 
+     right:-350px; 
+     padding: 10px; 
+     background-color:#ffffff; 
+     width: 70px;
+     height: 70px;
+     border-radius: 100px;
+    }
+    #md-search-text-cover{
+      width:500px;
+      
+    }
+    #md-search-text{
+    line-height: 1.5;
+    font-size: 20px;
+    text-transform: initial;
+    color:#d29948;
+    font-weight: 300;
+    text-align: center;
+    }
+    
+            .md-teach-img{
+                width:400px ;
+                height:400px;
+                margin-top: -10px;
+                object-fit: fit;
+            }
+            .md-teach-im{
+                width:300px ;
+                height:300px;
+    
+                object-fit: fit;
+            }
+            .md-teach-img-a{
+                width:400px ;
+                height:400px;
+                margin-top: -10px;
+                object-fit: fit;
+            }
+            .md-teach-im-a{
+                width:300px ;
+                height:300px;
+       
+            }
+            .md-teach-img-b{
+                width:300px ;
+                height:300px;
+           
+            }
+            .md-teach-im-b{
+                width:300px ;
+                height:300px;
+              
+            }
+            #md-text{
+                font-size: 12px
+            }
+            #md-g-cover{
+                display:flex; 
+                justify-content:space-around
+            }
+            #md-g-form{
+            min-width: 380px;
+            }
+
+            @media only screen and (max-width: 991px)  {
+              #md-teach-container{
+                  margin-top: -250px;
+              } 
+              #md-slide{
+            display: grid;
+            justify-content: space-between;
+              }
+          #md-g-cover{
+                display:grid; 
+             
+            }
+            #md-g-form{
+            max-width: 150px;
+            padding: 4px 50px;
+            }
+           #md-imgg{
+            width:300px;
+            height:300px;
+            object-fit:fill;
+            border:0px solid #D29948;
+            border-radius:100%;
+        }
+        #md-cam{
+             position: relative;
+             top:-100px; 
+             right:-240px; 
+             padding: 10px; 
+             background-color:#ffffff; 
+             width: 70px;
+             height: 70px;
+             border-radius: 100px;
+            }
+    #md-search-text-cover{
+     width:280px;
+      
+    }
+    #md-search-text{
+      line-height: 1.5;
+    font-size: 15px;
+    text-transform: initial;
+    color:#d29948;
+    font-weight: 300;
+    text-align: center;
+    }
+     
+            }
+
+            #md-grid-container{
+        display: flex;
+        justify-content: space-around;
+        }
+        #md-grid-left{
+        min-width:240px;
+        }
+        #md-grid-right{
+        min-width:240px;
+        }
+        #md-grid-leftt{
+        min-width:170px;
+        }
+        #md-grid-rightt{
+        min-width:210px;
+        }
+        #reg_fc_btn{
+         font-family:system-ui;
+         font-weight:100;
+         width:500px;
+         height:50px;
+         margin:10px;
+         background-color:violet;
+         padding:10px;
+         color:#ffffff;
+         border-bottom-right-radius:50px;
+         border-bottom-left-radius:50px;
+         border-top-right-radius:50px;
+        }
+        @media only screen and (max-width: 991px)  {
+            #md-ch{
+                padding: 20px 100px;
+            }
+        #md-ch1{
+                padding: 15px;
+            }
+        #md-phone-container{
+        margin-left: 100px
+        }
+        #md-grid-leftt{
+        max-width:270px;
+        }
+        #md-grid-rightt{
+        max-width:270px;
+        }
+        
+        #md-phone{
+        max-width: 300px;
+        
+        }
+        #md-phone-title{
+            text-align: center;
+        }
+        #md-grid-container{
+        display:grid;
+     
+       
+        }
+        #md-grid-left{
+        max-width: 280px;
+      
+        
+        }
+        #md-grid-right{
+        min-width: 280px;
+   
+        }
+        #reg_fc_btn{
+            max-width:230px
+        }
+          #recent-container{
+        justify-content: space-around;
+        align-items: center;
+        align-self: center;
+        display: grid;
+       
+    }
+    #recent-box{
+       border: 1px solid #d29948;
+       border-radius:4px;
+       padding-top: -5px;
+       width:300px;
+       
+       
+    }
+    #recent-cover{
+        margin-right: 50px;
+    }
+        }
+        @media only screen and (max-width: 480px)  {
+
+      #md-grid-right{
+        min-width: 270px;  
+ 
+      }
+      #md-grid-left{
+        min-width: 270px;  
+ 
+      }
+        }
+            </style>
+</head><!--/head-->
+
+<body>
+	<header id="header">      
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 overflow">
+                   <div class="social-icons pull-right">
+                        <ul class="nav nav-pills">
+                            <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                            <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                            <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href=""><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href=""><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div> 
+                </div>
+             </div>
+        </div>
+        <div class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="{{url_for('index')}}">
+                    	<h1><img src="/static/images/logo.png" alt="logo"></h1>
+                    </a>
+                    
+                </div>
+               
+                {% if current_user.is_authenticated:  %}
+                    {% if current_user.role == 'Tutor' %}
+
+                    <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                     <li class="active"><a href="{{url_for('home')}}">Home</a></li>
+                        <li ><a href="{{url_for('home')}}" style="text-transform: capitalize;">Holla! {{current_user.name}}</a></li>
+                                {% if current_user.bio_status == 0 %}
+                                <li class="active"><a href="{{url_for('bio')}}">Account</a></li>
+
+                                 {% else %}
+                                <li class="active"><a href="{{url_for('profile')}}">Account</a></li>
+                                {% endif %}
+                        </li> 
+                            
+                        </li>                  
+                       
+                                   
+                        <li><a href="{{url_for('logout')}}">Logout</a></li>                    
+                    </ul>
+                 </div>
+                 {% elif current_user.role == 'User' %}
+                            <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                     <li class="active"><a href="{{url_for('home')}}">Home</a></li>
+                        <li ><a href="{{url_for('home')}}" style="text-transform: capitalize;">Holla! {{current_user.name}}</a></li>
+                               
+                        </li> 
+                            
+                        </li>                  
+                       
+                                   
+                        <li><a href="{{url_for('logout')}}">Logout</a></li>                    
+                    </ul>
+                 </div>
+                 {% endif %}
+                 {% else %}
+
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="{{url_for('home')}}">Home</a></li>
+                        <li><i class="fa fa-angle-down"></i></a>
+                            
+                        </li>                  
+                       
+                        <li ><a href="{{url_for('reg')}}">Sign Up<i class="fa fa-angle-down"></i></a>
+                            <ul role="menu" class="sub-menu">
+                                <li><a href="{{url_for('reg')}}">User Signup</a></li>
+                                <li><a href="{{url_for('tutor_reg')}}">Tutors Signup</a></li>
+                                
+                            </ul>
+                        </li>                         
+                        <li><a href="{{url_for('login')}}">Login</a></li>                    
+                    </ul>
+                </div>
+                {% endif %}
+
+                <div class="search">
+                    <form role="form">
+                        <i class="fa fa-search"></i>
+                        <div class="field-toggle">
+                            <input type="text" class="search-form" autocomplete="off" placeholder="Search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--/#header-->
+
+    {% block content %}
+
+    {% endblock %}
+    <!--/#clients-->
+
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                
+                
+              
+                <div class="col-sm-12">
+                    <div class="copyright-text text-center">
+                        <p>&copy; Maetrotutor.com 2021. All Rights Reserved.</p>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/#footer-->
+
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+   <!--  <script type="text/javascript" src="/static/js/lightbox.min.js"></script> -->
+    <script type="text/javascript" src="/static/js/wow.min.js"></script>
+    <script type="text/javascript" src="/static/js/main.js"></script>   
+</body>
+</html>

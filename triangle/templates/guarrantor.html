@@ -1,0 +1,195 @@
+ {% extends 'layout/base.html' %}
+{% block content %}
+
+    <section id="blog" class="padding-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-5">
+                    <div class="sidebar blog-sidebar">
+                        <div class="sidebar-item  recent">
+                            <h3>Profile</h3>
+                            <div class="media">
+                                <div class="pull-left">
+                                   <i class="fa fa-user"></i>
+                                </div>
+                                <div class="media-body">
+                            <h4><a href="#">Name: {{current_user.name}}</a></h4>
+                           
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="pull-left">
+                                    <i class="fa fa-envelope"></i>
+                                </div>
+                                <div class="media-body">
+                                    <h4><a href="#">Email: {{current_user.email}}</a></h4>
+                           
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="pull-left">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <div class="media-body">
+                                    <h4><a href="#">Phone: {{current_user.phone}}</a></h4>
+                           
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="pull-left">
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                                <div class="media-body">
+                                    <h4><a href="#">Password: *********</a></h4>
+                           
+                                </div>
+                            </div>
+                        </div>
+                       
+                       
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-7">
+                 <div class="card border-1 shadow-sm" style="border: 1px solid #d29948; padding:30px; border-radius:4px">
+                    <div class="row">
+                         <div class="col-md-12 col-sm-12">
+                          {% with messages= get_flashed_messages(with_categories=true) %}
+                                    {% if messages %}
+                                         {% for category, message in messages %}
+                                      <div class="alert alert border-1 shadow-sm" {{category}}"  style=" color:#000000;border:1px solid  #e0ebeb; display: flex; font-size: 15px; text-align:center;padding-left: 40px; font-family: system-ui; font-weight: 100">
+                                        
+                                           {{message}}
+                                         </div>
+                                      {% endfor %}
+                                    {% endif %}
+                               {% endwith %}
+                            <div class="contact-form bottom border-1 shadow-sm" >
+                                <h2>Guarrantors Data</h2>
+                <form  method="post" action="{{ url_for('guarrantor') }}"  accept-charset="UTF-8" enctype="multipart/form-data">
+                            {{ form.hidden_tag() }}
+                                    <div class="row" id="md-g-cover">
+                                        <div class="form-group" id="md-g-form">
+                                           {{ form.gua_one_name.label(class="form-label", style="font-size:13px; ") }}
+                                                {% if form.gua_one_name.errors %}
+                                                {{ form.gua_one_name(class="form-control is-invalid") }}  
+                                                  <ul class="errors">
+                                                    {% for error in form.gua_one_name.errors %}
+                                                      <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                  </ul>
+                                                  {% else %}
+                                                   {{ form.gua_one_name(class="form-control",  autocomplete="off", id="md-phone") }} 
+                                            {% endif %}    
+                                        </div>
+                                        <div class="form-group" id="md-g-form">
+                                           {{ form.gua_one_phone.label(class="form-label", style="font-size:13px; ") }}
+                                                {% if form.gua_one_phone.errors %}
+                                                {{ form.gua_one_phone(class="form-control is-invalid") }}  
+                                                  <ul class="errors">
+                                                    {% for error in form.gua_one_phone.errors %}
+                                                      <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                  </ul>
+                                                  {% else %}
+                                                   {{ form.gua_one_phone(class="form-control",  autocomplete="off", id="md-phone") }} 
+                                            {% endif %}   
+                                        </div>
+                                    </div>
+                                    <div class="row" id="md-g-cover">
+                                        <div class="form-group" id="md-g-form">
+                                             {{ form.gua_one_address.label(class="form-label", style="font-size:13px; ") }}
+                                                {% if form.gua_one_address.errors %}
+                                                {{ form.gua_one_address(class="form-control is-invalid") }}  
+                                                  <ul class="errors">
+                                                    {% for error in form.gua_one_address.errors %}
+                                                      <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                  </ul>
+                                                  {% else %}
+                                                   {{ form.gua_one_address(class="form-control",  autocomplete="off", id="md-phone") }} 
+                                            {% endif %}   
+                                        </div>
+                                        <div class="form-group" id="md-g-form">
+                                             {{ form.gua_one_card.label(class="form-label", style="font-size:13px; ") }}
+                                                {% if form.gua_one_card.errors %}
+                                                {{ form.gua_one_card(class="form-control is-invalid") }}  
+                                                  <ul class="errors">
+                                                    {% for error in form.gua_one_card.errors %}
+                                                      <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                  </ul>
+                                                  {% else %}
+                                                   {{ form.gua_one_card(class="form-control",  autocomplete="off", id="md-phone") }} 
+                                            {% endif %}   
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row" id="md-g-cover">
+                                        <div class="form-group" id="md-g-form">
+                                             {{ form.gua_two_name.label(class="form-label", style="font-size:13px; ") }}
+                                                {% if form.gua_two_name.errors %}
+                                                {{ form.gua_two_name(class="form-control is-invalid") }}  
+                                                  <ul class="errors">
+                                                    {% for error in form.gua_two_name.errors %}
+                                                      <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                  </ul>
+                                                  {% else %}
+                                                   {{ form.gua_two_name(class="form-control",  autocomplete="off", id="md-phone") }} 
+                                            {% endif %}  
+                                        </div>
+                                        <div class="form-group" id="md-g-form">
+                                             {{ form.gua_two_phone.label(class="form-label", style="font-size:13px; ") }}
+                                                {% if form.gua_two_phone.errors %}
+                                                {{ form.gua_two_phone(class="form-control is-invalid") }}  
+                                                  <ul class="errors">
+                                                    {% for error in form.gua_two_phone.errors %}
+                                                      <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                  </ul>
+                                                  {% else %}
+                                                   {{ form.gua_two_phone(class="form-control",  autocomplete="off", id="md-phone") }} 
+                                            {% endif %}  
+                                        </div>
+                                    </div>
+                                    <div class="row" id="md-g-cover">
+                                        <div class="form-group" id="md-g-form">
+                                             {{ form.gua_two_address.label(class="form-label", style="font-size:13px; ") }}
+                                                {% if form.gua_two_address.errors %}
+                                                {{ form.gua_two_address(class="form-control is-invalid") }}  
+                                                  <ul class="errors">
+                                                    {% for error in form.gua_two_address.errors %}
+                                                      <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                  </ul>
+                                                  {% else %}
+                                                   {{ form.gua_two_address(class="form-control",  autocomplete="off", id="md-phone") }} 
+                                            {% endif %}   
+                                        </div>
+                                        <div class="form-group" id="md-g-form">
+                                           {{ form.gua_two_card.label(class="form-label", style="font-size:13px; ") }}
+                                                {% if form.gua_two_card.errors %}
+                                                {{ form.gua_two_card(class="form-control is-invalid") }}  
+                                                  <ul class="errors">
+                                                    {% for error in form.gua_two_card.errors %}
+                                                      <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                  </ul>
+                                                  {% else %}
+                                                   {{ form.gua_two_card(class="form-control",  autocomplete="off", id="md-phone") }} 
+                                            {% endif %}   
+                                        </div>
+                                    </div>                 
+                                    <div class="form-group">
+                                      {{ form.submit(class="btn btn-submit", autocomplete="off") }} 
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                       
+                 </div>
+                 </div>
+            </div>
+        </div>
+    </section>
+    {% endblock %}

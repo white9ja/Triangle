@@ -1,0 +1,227 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+
+     {% if current_user.role == 'Tutor' %}
+         {% if current_user.bio_status == '0' %}
+            <div class="alert alert-warning fade in"  style="max-width:400px; position: absolute;right:10px;z-index: 90;">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4 style="font-size: 15px;">Hello!  {{current_user.name}}</h4>
+                <p>Please complete your registration to make users find you.</p>
+                <center style="margin:15px"><a href="{{url_for('bio')}}" style="width:200px; height:60px; padding:10px 50px; border:1px solid rgb(216, 210, 210); border-radius:50px">Click here</a></center>
+            </div>
+             {% elif current_user.guarrantor_status == '0' %}
+              <div class="alert alert-info fade in"  style="max-width:400px; position: absolute;right:10px;z-index: 90;">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4 style="font-size: 15px;">Hello!  {{current_user.name}}</h4>
+                <p>Kindly Fill your Guarrantors form to get verified.</p>
+                <center style="margin:15px"><a href="{{url_for('guarrantor')}}" style="width:200px; height:60px; padding:10px 50px; border:1px solid rgb(216, 210, 210); border-radius:50px">Click here</a></center>
+            </div>
+
+         {% endif %}
+     {% endif %}
+    <!--/#page-breadcrumb-->
+
+        <div class="container" id="md-slide">
+            <div class="row">
+          
+                        <div id="carousel-example-generic" class="carousel slide"  data-ride="carousel" >
+                                        
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img src="/static/images/new/home11.jpg" style="width:380px; height:380px" alt="">
+                                    
+                                </div>
+                                <div class="item">
+                                    <img src="/static/images/new/home5.jpg" style="width:380px; height:380px"alt="">
+                                   
+                                </div>
+                                <div class="item">
+                                    <img src="/static/images/new/home4.jpg" style="width:380px; height:380px"alt="">
+                                   
+                                </div>
+                            </div>
+                           </div>
+                        </div>
+                
+                <div class="col-sm-6 padding-top wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="0ms" id="md-search">
+                  
+                        <div class="contact-form bottom" >
+                            <h2>Search</h2>
+                           <form  method="post" action=""  accept-charset="UTF-8" autocomplete="off">
+                            {{ form.hidden_tag() }}
+                                <div class="form-group">
+                                    {{ form.name.label(class="form-label", style="font-size:13px;") }}
+                                        {% if form.name.errors %}
+                                        {{ form.name(class="form-control is-invalid") }}  
+                                          <ul class="errors">
+                                            {% for error in form.name.errors %}
+                                              <li>{{ error }}</li>
+                                            {% endfor %}
+                                          </ul>
+                                          {% else %}
+                                           {{ form.name(class="form-control",  autocomplete="off", id="md-phone") }} 
+                                    {% endif %}      
+                                </div>
+                               
+                                                  
+                                <div class="form-group">
+                                 {{ form.submit(class="btn btn-submit", autocomplete="off",style="width:200px") }} 
+                                </div>
+                            </form>
+                        </div>
+                 
+                    <ul class="elements">
+                        <li class="wow fadeInUp" data-wow-duration="900ms" data-wow-delay="100ms"><i class="fa fa-angle-right" ></i><span  style="color:gray;font-size: 14px;">Search for home teacher by location e.g Abuja</span></li>
+                        <li class="wow fadeInUp" data-wow-duration="800ms" data-wow-delay="200ms"><i class="fa fa-angle-right"></i><span  style="color:gray;font-size: 14px;">Search for ONLINE teacher by Subject e.g Maths</span></li>
+                        <li class="wow fadeInUp" data-wow-duration="700ms" data-wow-delay="300ms"><i class="fa fa-angle-right"></i> <span  style="color:gray;font-size: 14px;">Search for teacher by class or level e.g Basic, Secondary or Tetiary</span></li>
+                        <li class="wow fadeInUp" data-wow-duration="600ms" data-wow-delay="400ms"><i class="fa fa-angle-right"></i> <span  style="color:gray;font-size: 14px;">Search for Tutors by Examination e.g JAMB, WAEC, NECO, GCE, NABTEB, ITELS, TOFELS</span></li>
+                        <!-- <li class="wow fadeInUp" data-wow-duration="500ms" data-wow-delay="500ms"><i class="fa fa-angle-right"></i> but also the leap into electronic typesetting.</li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#company-information-->
+
+    {% if teachers %}
+
+      
+
+        <section id="services">
+       <center><h2 style="font-family: system-ui;"> <span  style="color:#d29948; font-weight: 400">{{teachers.query.count()}}</span> Search Result</h2> </center> 
+        <div class="container" id="recent-cover">
+            <div class="row" id="recent-container">
+         {% if teachers.query.count() > 0 %}
+               {% for teacher in teachers.items %}
+                <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms" id="recent-box">
+                    <div class="single-service">
+                        <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="300ms">
+                            <img src="{{url_for('static', filename='user_uploads/' + teacher.image)}}" alt="" style="width:250px; height:250px; border-radius: 100%;"> 
+                        </div>
+                        <h2 style="font-family: system-ui;font-size:20px;text-transform:capitalize;">{{teacher.name}}</h2>
+                        <center><div style="display: flex;justify-content: center;"><img src="/static/images/new/locatio.png" style="width:30px; height:30px; margin-right:5px">{{teacher.city}} Nigeria</div></center>
+                       
+                    </div>
+                    <a href="{{url_for('detail', email= teacher.email )}}" style="width:100px; height:60px; border:none; padding:12px 50px; color:#ffffff; background-color: #d29948;border-radius: 40px;font-family: system-ui;">View profile</a>
+                </div>
+                {% endfor %}
+                 
+            
+             
+            </div>
+             <br>
+                 <center>
+               
+                  {% for page_num in teachers.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                      {% if page_num %}
+                           {% if teachers.page == page_num %}
+   <a style="background-color: #d29948; color:#ffffff; padding: 12px; border-radius:3px; margin-top:0px" href="{{url_for('home', page= page_num )}}">{{page_num}}</a>
+                            {% else %}
+   <a style="border:1px solid #d29948; padding: 12px; border-radius:3px; margin-top:0px" href="{{url_for('home', page= page_num )}}">{{page_num}}</a>
+                            {% endif %}
+                          {% else %}
+                         
+                      
+                      {% endif %}
+
+                  {% endfor %}
+               {% else %}
+                     <center>
+                     <img src="/static/images/new/loupe.png" style="object-fit:contain; width:80px;height:80px"  alt="no result">
+                     <div class="card bordered-1 shadow-sm" id="md-search-text-cover">
+                 <h4 id="md-search-text">Sorry there seem to be no available Tutor for your search or in that location. Kindly try the next closest location</h4></div>
+                     </center>
+                    {% endif %}
+         
+         
+
+       
+        </div>
+    </section>
+
+{% else %}
+
+ <section id="services">
+       <center><h2 style="font-family: system-ui;">Recently Verified Tutors</h2> </center> 
+        <div class="container" id="recent-cover">
+            <div class="row" id="recent-container">
+            {% for tutor in tutors.items %}
+                <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms" id="recent-box">
+                    <div class="single-service">
+                        <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="300ms">
+                            <img src="{{url_for('static', filename='user_uploads/' + tutor.image)}}" alt="" style="width:250px; height:250px; border-radius: 100%;"> 
+                        </div>
+                        <h2 style="font-family: system-ui;font-size:20px;text-transform:capitalize;">{{tutor.name}}</h2>
+                        <center><div style="display: flex;justify-content: center;"><img src="/static/images/new/locatio.png" style="width:30px; height:30px; margin-right:5px">{{tutor.city}} Nigeria</div></center>
+                       
+                    </div>
+                    <a href="{{url_for('detail', email= tutor.email )}}" style="width:100px; height:60px; border:none; padding:12px 50px; color:#ffffff; background-color: #d29948;border-radius: 40px;font-family: system-ui;">View profile</a>
+                </div>
+                {% endfor %}
+                 
+            
+             
+            </div>
+             <br>
+                 <center>
+               
+                  {% for page_num in tutors.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                      {% if page_num %}
+                           {% if tutors.page == page_num %}
+   <a style="background-color: #d29948; color:#ffffff; padding: 12px; border-radius:3px; margin-top:0px" href="{{url_for('home', page= page_num )}}">{{page_num}}</a>
+                            {% else %}
+   <a style="border:1px solid #d29948; padding: 12px; border-radius:3px; margin-top:0px" href="{{url_for('home', page= page_num )}}">{{page_num}}</a>
+                            {% endif %}
+                          {% else %}
+                         
+                      
+                      {% endif %}
+
+                  {% endfor %}
+
+                </center>
+         
+        </div>
+    </section>
+
+      {% endif %}
+      
+   
+    <!--/#services-->
+
+    <section id="clients">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="clients text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+                      
+                        <h1 class="title">Happy Clients</h1>
+                        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br> Ut enim ad minim veniam, quis nostrud </p>
+                    </div>
+                    <div class="clients-logo wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="/static/images/home/client1.png" class="img-responsive" alt=""></a>
+                        </div>
+                        <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="/static/images/home/client2.png" class="img-responsive" alt=""></a>
+                        </div>
+                         <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="/static/images/home/client3.png" class="img-responsive" alt=""></a>
+                        </div>
+                         <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="/static/images/home/client4.png" class="img-responsive" alt=""></a>
+                        </div>
+                         <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="/static/images/home/client5.png" class="img-responsive" alt=""></a>
+                        </div>
+                         <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="/static/images/home/client6.png" class="img-responsive" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </section>
+    <!--/#clients-->
+
+{% endblock  %}

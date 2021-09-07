@@ -1,0 +1,87 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+    <!--/#header-->
+    <!--/#page-breadcrumb-->
+
+    <section id="company-information" class="padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="carousel-container" ">
+                        <div id="carousel-example-generic" class="carousel slide"  data-ride="carousel" >
+                                        
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img src="/static/images/new/home11.jpg" alt="">
+                                    
+                                </div>
+                             
+                               
+                            </div>
+                           </div>
+                        </div>
+                </div>
+                <div class="col-sm-6">
+               
+                    <div class="card border-1 shadow-sm" style="border: 1px solid #d29948; padding:30px; border-radius:4px">
+                                 {% with messages= get_flashed_messages(with_categories=true) %}
+                                    {% if messages %}
+                                         {% for category, message in messages %}
+                                      <div class="alert alert border-1 shadow-sm" {{category}}"  style=" color:#000000;border:1px solid  #e0ebeb; display: flex; font-size: 15px; text-align:center;padding-left: 40px; font-family: system-ui; font-weight: 100">
+                                        
+                                           {{message}}
+                                         </div>
+                                      {% endfor %}
+                                    {% endif %}
+                               {% endwith %}
+                        <h2 style="color:#d29948">Sign-in</h2>
+                      <form  method="post" action="{{ url_for('login') }}"  accept-charset="UTF-8" autocomplete="off">
+                            {{ form.hidden_tag() }}
+                  
+                   
+                            
+                            <div class="form-group">
+                                {{ form.email.label(class="form-label", style="font-size:13px") }}
+                                {% if form.email.errors %}
+                                {{ form.email(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.email.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.email(class="form-control", autocomplete="off", id="md-phone") }} 
+                            {% endif %}         
+                            </div>
+                           
+                            <div class="form-group">
+                                 {{ form.password.label(class="form-label", style="font-size:13px") }}
+                                {% if form.password.errors %}
+                                {{ form.password(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.password.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.password(class="form-control", autocomplete="off", id="md-phone") }} 
+                            {% endif %}      
+                            </div>     
+                            
+                            <div class="form-group">
+                            {{ form.submit(class="btn btn-submit", autocomplete="off", id="md-phone") }} 
+                                
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <h5 style="color:#d29948" id="md-text"> <a href="{{url_for('password')}}">Forgot you Password ?</a></h5>
+                             
+                            </div>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% endblock %}

@@ -1,0 +1,114 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+
+    <section id="company-information" class="padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="carousel-container" ">
+                        <div id="carousel-example-generic" class="carousel slide"  data-ride="carousel" >
+                                        
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img src="/static/images/new/aa.jpg" alt="">
+                                    
+                                </div>
+                                <div class="item">
+                                    <img src="/static/images/new/bb.jpg" alt="">
+                                   
+                                </div>
+                               
+                            </div>
+                           </div>
+                        </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card border-1 shadow-sm" style="border: 1px solid #d29948; padding:30px; border-radius:4px">
+                        <h2 style="color:#d29948">Sign-Up</h2>
+                        
+                <form  method="post" action="{{ url_for('reg') }}"  accept-charset="UTF-8" autocomplete="off">
+                            {{ form.hidden_tag() }}
+                  
+                     <div class="form-group">
+
+                            {{ form.name.label(class="form-label", style="font-size:13px; ") }}
+                                {% if form.name.errors %}
+                                {{ form.name(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.name.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.name(class="form-control",  autocomplete="off", id="md-phone") }} 
+                            {% endif %}                   
+                    </div>
+                            
+                            <div class="form-group">
+                                {{ form.email.label(class="form-label", style="font-size:13px") }}
+                                {% if form.email.errors %}
+                                {{ form.email(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.email.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.email(class="form-control", autocomplete="off", id="md-phone") }} 
+                            {% endif %}         
+                            </div>
+                            <div class="form-group">
+                                 {{ form.phone.label(class="form-label", style="font-size:13px") }}
+                                {% if form.phone.errors %}
+                                {{ form.phone(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.phone.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.phone(class="form-control", autocomplete="off", id="md-phone") }} 
+                            {% endif %}         
+                            </div> 
+                            <div class="form-group">
+                                 {{ form.password.label(class="form-label", style="font-size:13px") }}
+                                {% if form.password.errors %}
+                                {{ form.password(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.password.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.password(class="form-control", autocomplete="off", id="md-phone") }} 
+                            {% endif %}      
+                            </div>     
+                            <div class="form-group">
+                                 {{ form.confirm_password.label(class="form-label", style="font-size:13px") }}
+                                {% if form.confirm_password.errors %}
+                                {{ form.confirm_password(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.confirm_password.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.confirm_password(class="form-control", autocomplete="off", id="md-phone") }} 
+                            {% endif %}      
+                            </div>              
+                            <div class="form-group">
+                            {{ form.submit(class="btn btn-submit", autocomplete="off", id="md-phone") }} 
+                                
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <h5 style="color:#d29948" id="md-text"> <a href="{{url_for('login')}}">Already have an account ?<span style="font-weight: 400"> Login</span></a></h5>
+                                <h5 style="color:#d29948" id="md-text"> <a href="{{url_for('tutor_reg')}}">Sign Up as a Tutor</a></h5>
+                            </div>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
