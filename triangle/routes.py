@@ -129,7 +129,7 @@ def home():
     #.with_entities(Bio.id, Bio.email, Bio.city, Bio.role, Skill.skill_name, Bio.image).distinct()
     #teachers = db.session.query(Bio.city, Skill.skill_name).join(Bio).join(Skill).filter(Bio.email == Skill.email).filter(Bio.city.like(f'%{form.name.data}%')).paginate(page = page,  per_page=3)
     # teachers = db.session.query(Bio).filter(Bio.city.like(f'%{form.name.data}%')).order_by(Bio.created_at.desc()).paginate(page = page,  per_page=3) 
-    teachers = (Bio).query.join(Skill, Bio.email == Skill.email == Category.email ).filter(or_(Skill.skill_name.like(f'%{form.name.data}%'),
+    teachers = (Bio).query.join(Skill, Bio.email == Skill.email ).join(Category, Bio.email == Category.email ).filter(or_(Skill.skill_name.like(f'%{form.name.data}%'),
       Bio.city.like(f'%{form.name.data}%'),
       Category.category_name.like(f'%{form.name.data}%'))).distinct().paginate(page = page,  per_page=3)
       
