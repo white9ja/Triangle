@@ -1,0 +1,102 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+    <!--/#header-->
+
+
+    <!--/#action-->
+
+    <section id="portfolio-information" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                  
+                  
+ <div id="accordion-container">
+                <h2 class="page-header" style="font-size: 18px"> <span style="color:#d29948"> {{categorys.count()}} </span> Skills / Subject Created (<small style=" color:red">Please maximum of 5</small>)</h2>
+                 {% for category in categorys %}
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title" style="display: flex; justify-content: space-between;">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{category.category_name}}" > 
+                        
+                                   <h5 style="text-transform: capitalize;">{{category.category_name}}</h5> 
+                                 
+                              
+                                 
+                                </a>
+                                 <a href="#collapse{{category.category_name}}" data-toggle="collapse" style="font-size: 9px ; border:1px solid #e0e0eb; height: 20px;padding:5px 5px; border-radius: 1px">Tap to edit / delete</a>
+                            </h4>
+                        </div>
+                        <div id="collapse{{category.category_name}}" class="panel-collapse collapse out">
+                            <div class="panel-body" style="justify-content: space-between; ">
+                               <i class="fa fa-trash" style="margin-right: 20px; color:#d29948"></i>
+                               <i class="fa fa-pencil" style="margin-left: 20px; color:#d29948; "><span style="font-family: system-ui">...edit</span> </i>
+                            </div>
+                        </div>
+                   
+                   
+                   
+                    </div>
+                </div><!--/#accordion-->
+                 {% endfor %}
+            </div><!--/#accordion-container-->
+                   
+                 
+                  
+                </div>
+                <div class="col-sm-6">
+                     <div class="card border-1 shadow-sm" style="border: 1px solid #d29948; padding:10px 30px; border-radius:4px; margin-top: 2 0px">
+                       {% with messages= get_flashed_messages(with_categories=true) %}
+                                    {% if messages %}
+                                         {% for category, message in messages %}
+                                      <div class="alert alert border-1 shadow-sm" {{category}}"  style=" color:#000000;border:1px solid  #e0ebeb; display: flex; font-size: 15px; text-align:center;padding-left: 40px; font-family: system-ui; font-weight: 100">
+                                        
+                                           {{message}}
+                                         </div>
+                                      {% endfor %}
+                                    {% endif %}
+                               {% endwith %}
+                        <h2 style="color:#d29948; ma">category / Subject </h2>
+                       
+                        <small>Please add one at a time </small>
+                          <form  method="post" action=""  accept-charset="UTF-8" autocomplete="off">
+                            {{ form.hidden_tag() }}
+                  
+                             <div class="form-group">
+
+                                    {{ form.category_name.label(class="form-label", style="font-size:13px;") }}
+                                        {% if form.category_name.errors %}
+                                        {{ form.category_name(class="form-control is-invalid") }}  
+                                          <ul class="errors">
+                                            {% for error in form.category_name.errors %}
+                                              <li>{{ error }}</li>
+                                            {% endfor %}
+                                          </ul>
+                                          {% else %}
+                                           {{ form.category_name(class="form-control",  autocomplete="off", id="md-phone") }} 
+                                    {% endif %}                   
+                            </div>
+                                      
+                           
+                            
+                            <div class="form-group">
+                                {{ form.submit(class="btn btn-submit", autocomplete="off", id="md-phone") }} 
+                            </div>
+                            
+                          
+                        </form>
+                       
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!--/#portfolio-information-->
+
+
+              
+            </div>
+        </div>
+   {% endblock %}

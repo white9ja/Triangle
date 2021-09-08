@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,SubmitField, BooleanField,DateField,  SelectField, DateField, TextAreaField
 from flask_wtf.file import FileField, FileAllowed
 from wtforms.validators import DataRequired, Email, Length, ValidationError, EqualTo
-from triangle.models import User, Bio, Skill
+from triangle.models import User, Bio, Skill, Guarrantor, Category
 from flask_login import current_user
 
 
@@ -168,6 +168,15 @@ class SkillForm(FlaskForm):
 class EditSkillForm(FlaskForm):
     skill_name = StringField('Modify Skill / Subject', validators=[DataRequired(), Length(min=3, max=50, message=('Please ensure to enter your skill / subject without abreviation'))])
     submit = SubmitField ('Modify') 
+
+class CategoryForm(FlaskForm):
+    category_name = StringField('Class / Exam', validators=[DataRequired(), Length(min=3, max=50, message=('Please ensure to enter  class / Exam as generally known'))])
+    submit = SubmitField ('Add') 
+
+class EditCategoryForm(FlaskForm):
+    category_name = StringField('Modify Class / Exam', validators=[DataRequired(), Length(min=3, max=50, message=('Please ensure to enter  class / Exam as generally known'))])
+    submit = SubmitField ('Modify') 
+
 
 
 class EditBioForm(FlaskForm):

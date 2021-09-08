@@ -5,9 +5,9 @@ from datetime import datetime
 from datetime import date
 from flask import render_template, request, session, logging, url_for, redirect, flash, request
 from triangle import app, db, bcrypt
-from triangle.forms import UserRegForm, LoginForm, TutorRegForm, ResetForm, BioForm, SkillForm,UpdateImageForm, EditBioForm, EditSkillForm, SearchForm, GuarrantorForm
+from triangle.forms import UserRegForm, LoginForm, TutorRegForm, ResetForm, BioForm, SkillForm,UpdateImageForm, EditBioForm, EditSkillForm, SearchForm, GuarrantorForm,CategoryForm, EditCategoryForm
 from flask_login import login_user, current_user, logout_user, login_required
-from triangle.models import User,Bio, Skill, Guarrantor
+from triangle.models import User,Bio, Skill, Guarrantor, Category
 from sqlalchemy import or_
 
 
@@ -129,8 +129,10 @@ def home():
     #.with_entities(Bio.id, Bio.email, Bio.city, Bio.role, Skill.skill_name, Bio.image).distinct()
     #teachers = db.session.query(Bio.city, Skill.skill_name).join(Bio).join(Skill).filter(Bio.email == Skill.email).filter(Bio.city.like(f'%{form.name.data}%')).paginate(page = page,  per_page=3)
     # teachers = db.session.query(Bio).filter(Bio.city.like(f'%{form.name.data}%')).order_by(Bio.created_at.desc()).paginate(page = page,  per_page=3) 
-    teachers = Bio.query.join(Skill, Bio.email == Skill.email ).filter(or_(Skill.skill_name.like(f'%{form.name.data}%'),
-      Bio.city.like(f'%{form.name.data}%'))).distinct().paginate(page = page,  per_page=3)
+    teachers = (Bio).query.join(Skill, Bio.email == Skill.email == Category.email ).filter(or_(Skill.skill_name.like(f'%{form.name.data}%'),
+      Bio.city.like(f'%{form.name.data}%'),
+      Category.category_name.like(f'%{form.name.data}%'))).distinct().paginate(page = page,  per_page=3)
+      
     # teachers= Skill.query.filter_by(skill_name= form.name.data, location= form.location.da).order_by(Workers.completed_at.desc()).paginate(page = page,  per_page=3)
     if teachers:
       return render_template('/home.html', title='Search', teachers = teachers, form=form)
@@ -153,23 +155,25 @@ def password ():
 
 #This is the Home route
 @app.route('/user_detail/<email>')
-
+@login_required
 def detail (email):
   user = User.query.get(email)
   users = User.query.filter_by(email = email).first()
+  categorys = Category.query.filter_by(email=email)
   skills = Skill.query.filter_by(email=email)
   bios = Bio.query.filter_by(email = email)
   image = url_for('static', filename='user_uploads/' + str(users.image))
-  return render_template('/detail.html',title='user-detail', bios = bios, skills = skills, image =image)
+  return render_template('/detail.html',title='user-detail', bios = bios, skills = skills, categorys=categorys, image =image)
 
 
 @app.route('/profile')
-
+@login_required
 def profile ():
+  categorys = Category.query.filter_by(email = current_user.email)
   skills = Skill.query.filter_by(email = current_user.email)
   bios = Bio.query.filter_by(email = current_user.email)
   image = url_for('static', filename='user_uploads/' + str(current_user.image))
-  return render_template('/profile.html',title='user-detail', bios = bios, skills = skills, image =image)
+  return render_template('/profile.html',title='user-detail', bios = bios, skills = skills, categorys= categorys, image =image)
 
 
 
@@ -288,6 +292,53 @@ def del_skill(skill_id):
   flash(f'skill Deleted Successfully !', 'success')
   return redirect (url_for('skill'))
 
+
+#this is the route to add class or examination
+@app.route('/category', methods=['GET', 'POST'])
+@login_required
+def cate():
+  categorys = Category.query.filter_by(email = current_user.email)
+  form = CategoryForm()
+  if form.validate_on_submit():
+      category = Category(email=current_user.email, category_name=form.category_name.data, category_status= 1)
+      current_user.pro_status = 1 
+      db.session.add(category)
+      db.session.commit()
+      flash(f'Class Added Successfully !', 'success')
+     
+      return redirect (url_for('profile'))
+  return render_template('category.html', title = 'Category', form=form, categorys = categorys)
+
+
+#This is the update category infor form
+@app.route('/editcategory/<int:category_id>/update',methods=['GET', 'POST'])
+@login_required
+def editcate(category_id):
+  category = Category.query.get(category_id)
+  form = EditCategoryForm()
+  categorys = Category.query.filter_by(email= current_user.email)
+  if form.validate_on_submit():
+
+    category.category_name = form.category_name.data
+   
+    db.session.commit()
+    flash(f'Updated Successfully !', 'success')
+    return redirect (url_for('cate', category_id = category.id, email = current_user.email))
+  elif request.method == 'GET':
+    form.category_name.data = category.category_name
+  return render_template('editcategory.html', title = 'Modified Successfully',  form=form, categorys = categorys)
+
+
+
+#This is the route to delete your previous class or exam  by id
+@app.route('/categorys/<int:category_id>/delete', methods=['GET', 'POST'])
+@login_required
+def del_category(category_id):
+  cat = Category.query.get(category_id)
+  db.session.delete(cat)
+  db.session.commit()
+  flash(f'category Deleted Successfully !', 'success')
+  return redirect (url_for('cate'))
 
 
 #this is the guarrantor route

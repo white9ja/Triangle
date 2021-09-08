@@ -88,6 +88,17 @@ class Skill(db.Model, UserMixin):
     active = db.Column(db.Boolean())
     confirmed_at = db.Column(db.DateTime())
 
+class Category(db.Model, UserMixin):
+    
+    id = db.Column(db.Integer, primary_key=True)
+    category_name = db.Column(db.String(255), nullable=True)
+    email = db.Column(db.String(255), nullable=True)
+    category_status = db.Column(db.String(255), nullable=True, default= 0)
+    created_at = db.Column(db.DateTime(), default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime())
+    activated_status = db.Column(db.String(255), nullable=True, default= 0)
+    active = db.Column(db.Boolean())
+    confirmed_at = db.Column(db.DateTime())
 
 
 class Guarrantor(db.Model, UserMixin):

@@ -76,7 +76,16 @@
     color:#d29948;
     font-weight: 300;
     text-align: center;
-    }
+    }.blinking{
+    animation:blinkingText 1.2s infinite;
+}
+@keyframes blinkingText{
+    0%{     color: #000;    }
+    49%{    color: #000; }
+    60%{    color: transparent; }
+    99%{    color:transparent;  }
+    100%{   color: #000;    }
+}
     
             .md-teach-img{
                 width:400px ;
@@ -270,7 +279,9 @@
  
       }
         }
+        
             </style>
+           
 </head><!--/head-->
 
 <body>
@@ -347,7 +358,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="{{url_for('home')}}">Home</a></li>
-                        <li><i class="fa fa-angle-down"></i></a>
+                    
                             
                         </li>                  
                        
@@ -397,7 +408,7 @@
         </div>
     </footer>
     <!--/#footer-->
-
+ 
     <script type="text/javascript" src="/static/js/jquery.js"></script>
     <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
    <!--  <script type="text/javascript" src="/static/js/lightbox.min.js"></script> -->
