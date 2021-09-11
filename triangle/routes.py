@@ -367,9 +367,10 @@ def schedule (email):
   user = User.query.get(email)
   users = User.query.filter_by(email=email)
   bios = Bio.query.filter_by(email = email)
+  services = Service.query.filter_by(email=email)
 
   # image = url_for('static', filename='user_uploads/' + str(users.image))
-  return render_template('/schedule.html',title='My Schedule', bios =bios, users = users)
+  return render_template('/schedule.html',title='Schedule', services = services, bios =bios, users = users)
 
 
 
