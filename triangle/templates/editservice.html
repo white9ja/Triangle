@@ -1,0 +1,143 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+
+
+    <!--/#header-->
+
+
+    <!--/#action-->
+
+    <section id="portfolio-information" class="">
+        <div class="container">
+            <div class="row">
+            {% for bio in bios %}
+                <div class="col-sm-6">
+                    <img src="{{url_for('static', filename='user_uploads/' + bio.image)}}"  class="card border-1 shadow-sm" alt="" id="md-imgg">
+                   
+                </div>
+                {% endfor %}
+                <div class="col-sm-6">
+
+  <div id="tab-container">
+                <div class="row">
+                   
+                  
+                     <div class="card border-1 shadow-sm" style="border: 1px solid #d29948; padding:10px 30px; border-radius:4px; margin-top: 10px">
+                       {% with messages= get_flashed_messages(with_categories=true) %}
+                                    {% if messages %}
+                                         {% for category, message in messages %}
+                                      <div class="alert alert border-1 shadow-sm" {{category}}"  style=" color:#000000;border:1px solid  #e0ebeb; display: flex; font-size: 15px; text-align:center;padding-left: 40px; font-family: system-ui; font-weight: 100">
+                                        
+                                           {{message}}
+                                         </div>
+                                      {% endfor %}
+                                    {% endif %}
+                               {% endwith %}
+                        <h2 style="color:#d29948;"> Update Service / Schedule </h2>
+                         <form  method="post" action=""  accept-charset="UTF-8" enctype="multipart/form-data">
+                            {{ form.hidden_tag() }}
+                  
+                     <div class="form-group">
+
+                            {{ form.name.label(class="form-label", style="font-size:13px; ") }}
+                                {% if form.name.errors %}
+                                {{ form.name(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.name.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.name(class="form-control",  autocomplete="off", id="md-phone") }} 
+                            {% endif %}                   
+                    </div>
+                            
+                           
+                  <div class="col-form-label"  id="md-grid-container" style="margin-top: -10px">
+                                <div class="form-group" id="md-grid-left1">
+                                 {{ form.meeting.label(class="form-label", style="font-size:13px; ") }}
+                                    {% if form.meeting.errors %}
+                                        {{ form.meeting(class="form-control is-invalid") }}  
+                                          <ul class="errors">
+                                            {% for error in form.meeting.errors %}
+                                              <li>{{ error }}</li>
+                                            {% endfor %}
+                                          </ul>
+                                          {% else %}
+                                           {{ form.meeting(class="form-control",  autocomplete="off", id="md-meeting") }} 
+                                    {% endif %} 
+                                </div>
+                                <div class="form-group" id="md-grid-right1" >
+                                 {{ form.available.label(class="form-label", style="font-size:13px; ") }}
+                                   {% if form.available.errors %}
+                                        {{ form.available(class="form-control is-invalid") }}  
+                                          <ul class="errors">
+                                            {% for error in form.available.errors %}
+                                              <li>{{ error }}</li>
+                                            {% endfor %}
+                                          </ul>
+                                          {% else %}
+                                           {{ form.available(class="form-control",  autocomplete="off", id="md-phone") }} 
+                                    {% endif %} 
+                                </div> 
+
+                            </div>                  
+                                <div class="form-group" >
+                             {{ form.description.label(class="form-label", style="font-size:13px; ") }}
+                                {% if form.description.errors %}
+                                {{ form.description(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.description.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.description(class="form-control",  autocomplete="off", id="md-phone") }} 
+                            {% endif %}         
+                                </div> 
+                           
+                           
+                                <div class="form-group" >
+                            {{ form.price.label(class="form-label", style="font-size:13px; ") }}
+                                {% if form.price.errors %}
+                                {{ form.price(class="form-control is-invalid") }}  
+                                  <ul class="errors">
+                                    {% for error in form.price.errors %}
+                                      <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                   {{ form.price(class="form-control",  autocomplete="off", id="md-phone") }} 
+                            {% endif %}         
+                                </div> 
+                            
+                             
+                            <div class="form-group">
+                                {{ form.submit(class="btn btn-submit", autocomplete="off", id="md-phone") }} 
+                            </div>
+                            
+                          
+                        </form>
+                    </div>
+               
+
+                  
+                </div>
+            </div><!--/#table-container-->
+
+
+                </div>
+        
+            </div>
+           <div class="border-1 shadow-sm" style="background-color: #d29948; width:60px;height: 60px; border-radius: 50px; right:50px; position: fixed; top:75%; align-items: center; justify-content: center; ">
+ <a href="{{url_for('skill')}}"> <h1 style="color:#ffffff; font-size:50px; text-align: center; align-items: center;font-weight: 100;justify-content: center;margin-top:0px">+</h1></a>
+</div>
+        </div>
+    </section>
+     <!--/#portfolio-information-->
+
+      
+            </div>
+        </div>
+
+   {% endblock %}

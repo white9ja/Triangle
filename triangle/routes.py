@@ -400,6 +400,47 @@ def add_service (email):
     return redirect (url_for('service', bios = bios, email =current_user.email))
   return render_template('/add_service.html',title='Add Service', form =form, bios =bios, users = users)
 
+
+
+#This is the update service infor form
+@app.route('/editservice/<int:service_id>/update',methods=['GET', 'POST'])
+@login_required
+def editser(service_id):
+  bios = Bio.query.filter_by(email = current_user.email)
+  services = Service.query.filter_by(email=current_user.email)
+  service = Service.query.get(service_id)
+  form = ServiceForm()
+  services = Service.query.filter_by(email= current_user.email)
+  if form.validate_on_submit():
+    service.name = form.name.data
+    service.meeting = form.meeting.data
+    service.available = form.available.data
+    service.description = form.description.data
+    service.price = form.price.data
+   
+    db.session.commit()
+    flash(f'Updated Successfully !', 'success')
+    return redirect (url_for('service', service_id = service.id, bios=bios, email = current_user.email))
+  elif request.method == 'GET':
+    form.name.data = service.name
+    form.meeting.data = service.meeting
+    form.available.data = service.available
+    form.description.data = service.description
+    form.price.data = service.price
+  return render_template('editservice.html', title = 'Modified Successfully',  form=form, bios=bios, email = current_user.email)
+
+#This is the route to delete your previous class or exam  by id
+@app.route('/services/<int:service_id>/delete', methods=['GET', 'POST'])
+@login_required
+def del_service(service_id):
+  bios = Bio.query.filter_by(email = current_user.email)
+  services = Service.query.filter_by(email=current_user.email)
+  ser = Service.query.get(service_id)
+  db.session.delete(ser)
+  db.session.commit()
+  flash(f'service Deleted Successfully !', 'success')
+  return redirect (url_for('service', email =current_user.email))
+
 #This is the logout route
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
