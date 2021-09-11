@@ -5,7 +5,7 @@ from datetime import datetime
 from datetime import date
 from flask import render_template, request, session, logging, url_for, redirect, flash, request
 from triangle import app, db, bcrypt
-from triangle.forms import UserRegForm, LoginForm, TutorRegForm, ResetForm, BioForm, SkillForm,UpdateImageForm, EditBioForm, EditSkillForm, SearchForm, GuarrantorForm,CategoryForm, EditCategoryForm,ServiceForm
+from triangle.forms import UserRegForm, LoginForm, TutorRegForm, ResetForm, BioForm, SkillForm,UpdateImageForm, EditBioForm, EditSkillForm, SearchForm, GuarrantorForm,CategoryForm, EditCategoryForm,ServiceForm,UpdateServiceForm
 from flask_login import login_user, current_user, logout_user, login_required
 from triangle.models import User,Bio, Skill, Guarrantor, Category, Service
 from sqlalchemy import or_
@@ -409,7 +409,7 @@ def editser(service_id):
   bios = Bio.query.filter_by(email = current_user.email)
   services = Service.query.filter_by(email=current_user.email)
   service = Service.query.get(service_id)
-  form = ServiceForm()
+  form = UpdateServiceForm()
   services = Service.query.filter_by(email= current_user.email)
   if form.validate_on_submit():
     service.name = form.name.data
@@ -420,7 +420,7 @@ def editser(service_id):
    
     db.session.commit()
     flash(f'Updated Successfully !', 'success')
-    return redirect (url_for('service', service_id = service.id, bios=bios, email = current_user.email))
+    return redirect (url_for('service', service_id = service.id, email = current_user.email))
   elif request.method == 'GET':
     form.name.data = service.name
     form.meeting.data = service.meeting
