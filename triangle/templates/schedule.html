@@ -34,7 +34,13 @@
                             <div class="tab-pane fade" id="tab1-{{service.name}}">
                             <div style="padding: 5px 20px; ">
                             <center>
-                                <p>{{service.meeting}} Section/Meeting In a Week <small style="background-color: #00b300;color:#ffffff; padding: 7px 10px; border-radius:3px; font-size: 9px">{{service.available}}</small></p>
+                           {% if service.available == 'NOT-AVAILABLE' %}
+                        <small style="background-color: red;color:#ffffff; padding: 7px 10px; border-radius:3px; font-size: 9px; ">{{service.available}}</small>
+                                    {% else %}
+                     <small style="background-color: #00b300;color:#ffffff; padding: 7px 10px; border-radius:3px; font-size: 9px; ">{{service.available}}</small>
+                            {% endif%}
+                            <br>    
+                                <p>{{service.meeting}} Section/Meeting In a Week </p>
                                 <hr>
                                 <p>{{ 4 * service.meeting|int}} Section/Meeting In a Month</p>
                                 <hr>
