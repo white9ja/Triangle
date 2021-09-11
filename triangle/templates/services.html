@@ -1,0 +1,77 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+
+
+    <!--/#header-->
+
+
+    <!--/#action-->
+
+    <section id="portfolio-information" class="">
+        <div class="container">
+            <div class="row">
+            {% for bio in bios %}
+                <div class="col-sm-6">
+                    <img src="{{url_for('static', filename='user_uploads/' + bio.image)}}"  class="card border-1 shadow-sm" alt="" id="md-imgg">
+                   
+                </div>
+                {% endfor %}
+                <div class="col-sm-6">
+
+  <div id="tab-container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="page-header" style="color:#d29948">Holla, bellow are the price and schedule for my coaching</h5>
+                    </div>
+                    <div class="col-md-12">
+                        <ul id="tab1" class="nav nav-tabs">
+                           {% for service in services %}
+                            <li class="active-in"><a  href="#tab1-{{service.name}}" data-toggle="tab">{{service.name}}</a></li>
+                           {% endfor %}
+                        </ul>
+                        <div class="tab-content" style="">
+                         {% for service in services %}
+                            <div class="tab-pane fade" id="tab1-{{service.name}}">
+                            <div style="padding: 5px 20px; ">
+                            <center>
+                                <p>{{service.meeting}} Section/Meeting In a Week</p>
+                                <hr>
+                                <p>{{ 4 * service.meeting|int}} Section/Meeting In a Month</p>
+                                <hr>
+                                <p>{{service.description}}</p>
+                                <hr>
+                                <p style="color:#d29948; font-weight: bold">{{service.price}} / Month</p>
+                                <p> <a href="#" class="btn btn-common capitalize" style="border-color:#d29948; padding: 10px 10px; margin: 5px"> <img src="/static/images/new/debit-card.png" style="width:20px; height:20px"> Subscribe for service </a></p>
+                            </center>
+                            </div>
+
+                           
+                            </div>
+
+                            {% endfor %}
+                           
+                        </div>
+                    </div>
+
+                  
+                </div>
+            </div><!--/#table-container-->
+
+
+                </div>
+        
+            </div>
+            {% for bio in bios %}
+           <div class="border-1 shadow-sm" style="background-color: #d29948; width:60px;height: 60px; border-radius: 50px; right:50px; position: fixed; top:75%; align-items: center; justify-content: center; ">
+ <a href="{{url_for('add_service' ,email =bio.email )}}"> <h1 style="color:#ffffff; font-size:50px; text-align: center; align-items: center;font-weight: 100;justify-content: center;margin-top:0px">+</h1></a>
+</div>
+            {% endfor %}
+        </div>
+    </section>
+     <!--/#portfolio-information-->
+
+      
+            </div>
+        </div>
+
+   {% endblock %}

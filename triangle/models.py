@@ -117,3 +117,28 @@ class Guarrantor(db.Model, UserMixin):
     activated_status = db.Column(db.String(255), nullable=True, default= 0)
     active = db.Column(db.Boolean())
     confirmed_at = db.Column(db.DateTime())
+
+
+
+
+class Service(db.Model, UserMixin):
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=True)
+    email = db.Column(db.String(255), nullable=True)
+    meeting = db.Column(db.String(255), nullable=True)
+    description = db.Column(db.String(255), nullable=True)
+    available = db.Column(db.String(255), nullable=True)
+    duration = db.Column(db.String(255), nullable=True)
+    price = db.Column(db.String(255), nullable=True)
+    week_price = db.Column(db.String(255), nullable=True)
+    incase = db.Column(db.String(255), nullable=True)
+    class_status = db.Column(db.String(255), nullable=True, default= 0)
+    meeting_count = db.Column(db.String(255), nullable=True, default= 0)
+    class_count = db.Column(db.String(255), nullable=True, default= 0)
+    count = db.Column(db.String(255), nullable=True, default= 0)
+    created_at = db.Column(db.DateTime(), default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime())
+    activated_status = db.Column(db.String(255), nullable=True, default= 0)
+    active = db.Column(db.Boolean())
+    confirmed_at = db.Column(db.DateTime())

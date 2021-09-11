@@ -85,11 +85,12 @@
                         <a href="#" class="btn btn-common capitalize" style="border-color:green; padding: 5px 10px; margin: 5px"> <img src="/static/images/new/hang.png" style="width:29px; height:29px"> Google meeting</a>
                         
                     </div>
+                    
+                       {% for bio in bios %}
                      <div class="live-preview">
-                        <a href="#" class="btn btn-common capitalize" style="border-color:#d29948; padding: 10px 10px; margin: 5px"> <img src="/static/images/new/notification.png" style="width:20px; height:20px"> Request service </a>
-                       
-                        
+                        <a href="{{url_for('schedule', email= bio.email)}}" class="btn btn-common capitalize" style="border-color:#d29948; padding: 10px 10px; margin: 5px"> <img src="/static/images/new/notification.png" style="width:20px; height:20px"> Request service </a> 
                     </div>
+                    {% endfor %}
                 </div>
             </div>
            

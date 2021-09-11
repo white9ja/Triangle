@@ -102,8 +102,7 @@
                     {% endif %}
 
 
-
-
+ 
 
                     <div class="client overflow">
                         <h3>Available for online tutelage:</h3>
@@ -114,6 +113,11 @@
                         <a href="#" class="btn btn-common capitalize" style="border-color:green; padding: 5px 10px; margin: 5px"> <img src="/static/images/new/hang.png" style="width:29px; height:29px"> Google meeting</a>
                         
                     </div>
+                    {% for bio in bios %}
+                    <div class="live-preview">
+                       <a href="{{url_for('service', email= bio.email)}}" class="btn btn-common capitalize" style="border-color:#d29948; padding: 10px 10px; margin: 5px"> <img src="/static/images/new/debit-card.png" style="width:20px; height:20px">  Add / Edit Services & Payment</a> 
+                    </div>
+                    {% endfor %}
             </div>
             <div class="border-1 shadow-sm" style="background-color: #d29948; width:60px;height: 60px; border-radius: 50px; right:50px; position: fixed; top:75%; align-items: center; justify-content: center; ">
  <a href="{{url_for('skill')}}"> <h1 style="color:#ffffff; font-size:50px; text-align: center; align-items: center;font-weight: 100;justify-content: center;margin-top:0px">+</h1></a>

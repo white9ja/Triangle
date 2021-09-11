@@ -1,0 +1,73 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+
+
+    <!--/#header-->
+
+
+    <!--/#action-->
+
+    <section id="portfolio-information" class="">
+        <div class="container">
+            <div class="row">
+            {% for bio in bios %}
+                <div class="col-sm-6">
+                    <img src="{{url_for('static', filename='user_uploads/' + bio.image)}}"  class="card border-1 shadow-sm" alt="" id="md-imgg">
+                   
+                </div>
+                {% endfor %}
+                <div class="col-sm-6">
+
+  <div id="tab-container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="page-header" style="color:#d29948">Holla, bellow are the price and schedule for my coaching</h5>
+                    </div>
+                    <div class="col-md-12">
+                        <ul id="tab1" class="nav nav-tabs">
+                            <li class="active"><a href="#tab1-SSCE" data-toggle="tab">SSCE</a></li>
+                            <li><a href="#tab1-JAMB" data-toggle="tab">JAMB</a></li>
+                            <li><a href="#tab1-FRENCH" data-toggle="tab">FRENCH</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="tab1-SSCE">
+                            <div style="padding: 5px 20px; ">
+                            <center>
+                                <p>3 Section/Meeting In a Week</p>
+                                <hr>
+                                <p>12 Section/Meeting In a Month</p>
+                                <hr>
+                                <p>Please note that this consist of 4 major courses e.g Maths ,English, Physics and Chemistry</p>
+                                <hr>
+                                <p style="color:#d29948; font-weight: bold">N 45,000 / Month</p>
+                                <p> <a href="#" class="btn btn-common capitalize" style="border-color:#d29948; padding: 10px 10px; margin: 5px"> <img src="/static/images/new/debit-card.png" style="width:20px; height:20px"> Subscribe for service </a></p>
+                            </center>
+                            </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-JAMB">
+                                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-FRENCH">
+                                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                  
+                </div>
+            </div><!--/#table-container-->
+
+
+                </div>
+        
+            </div>
+           
+        </div>
+    </section>
+     <!--/#portfolio-information-->
+
+      
+            </div>
+        </div>
+
+   {% endblock %}

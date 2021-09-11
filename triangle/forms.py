@@ -287,7 +287,6 @@ class LoginForm(FlaskForm):
 
 
 
-
 #This is the model class for login
 class GuarrantorForm(FlaskForm):
 
@@ -306,3 +305,24 @@ class GuarrantorForm(FlaskForm):
 class SearchForm(FlaskForm):
     name = StringField('Search by Subject or Location', validators=[DataRequired(), Length(min=3, max=50, message=('Please ensure to enter your subject or location without abreviation'))])
     submit = SubmitField ('Search') 
+
+
+
+class ServiceForm(FlaskForm):
+    name = StringField('Class/Examamination e.g SSCE, JAMB', validators=[DataRequired(), Length(min=3, max=50, message=('Please ensure to enter your Class / Exam name'))])
+    meeting = StringField(' Number of meeting / section per week', validators=[DataRequired(), Length(min=1, max=1, message=('Invalid or wrong Meeting / Section or Coaching Number Per WeeK, Please enter 1-7'))])
+    description = TextAreaField('Description  e.g Number of subject and meeting duration', validators=[DataRequired(), Length(min=3, max=250, message=('Please ensure to enter your Class / Exam name'))])
+    available = SelectField(
+        'Available to coach now',
+        [DataRequired()],
+        choices=[
+            ('', 'Select Availability status'),
+            ('AVAILABLE', 'Available'),
+            ('NOT-AVAILABLE', 'Not available'),
+            ('BOOKED', 'Booked'),
+            ('NEXT-WEEK', 'Available Next-Week'),
+            ('NEXT-MONTH', 'Available Next-Month'),
+            ('ONLINE CLASSES ONLY', 'ONLINE CLASSES ONLY'),
+        ])
+    price = StringField('Month Price', validators=[DataRequired(), Length(min=3, max=10, message=('Please enter a valid or correct price for your service'))])
+    submit = SubmitField ('Add')

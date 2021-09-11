@@ -5,9 +5,9 @@ from datetime import datetime
 from datetime import date
 from flask import render_template, request, session, logging, url_for, redirect, flash, request
 from triangle import app, db, bcrypt
-from triangle.forms import UserRegForm, LoginForm, TutorRegForm, ResetForm, BioForm, SkillForm,UpdateImageForm, EditBioForm, EditSkillForm, SearchForm, GuarrantorForm,CategoryForm, EditCategoryForm
+from triangle.forms import UserRegForm, LoginForm, TutorRegForm, ResetForm, BioForm, SkillForm,UpdateImageForm, EditBioForm, EditSkillForm, SearchForm, GuarrantorForm,CategoryForm, EditCategoryForm,ServiceForm
 from flask_login import login_user, current_user, logout_user, login_required
-from triangle.models import User,Bio, Skill, Guarrantor, Category
+from triangle.models import User,Bio, Skill, Guarrantor, Category, Service
 from sqlalchemy import or_
 
 
@@ -358,6 +358,46 @@ def guarrantor ():
   return render_template('guarrantor.html',title='Guarrantor Form', form = form)
 
 
+
+
+#This is the default route
+@app.route('/schedule/<email>')
+@login_required
+def schedule (email):
+  user = User.query.get(email)
+  users = User.query.filter_by(email=email)
+  bios = Bio.query.filter_by(email = email)
+
+  # image = url_for('static', filename='user_uploads/' + str(users.image))
+  return render_template('/schedule.html',title='My Schedule', bios =bios, users = users)
+
+
+
+#This is the default route
+@app.route('/services/<email>')
+@login_required
+def service (email):
+  user = User.query.get(email)
+  users = User.query.filter_by(email=email)
+  bios = Bio.query.filter_by(email = email)
+  services = Service.query.filter_by(email=email)
+  # image = url_for('static', filename='user_uploads/' + str(users.image))
+  return render_template('/services.html',title='My Schedule', services = services, bios =bios, users = users)
+
+
+
+@app.route('/add_service/<email>', methods=['GET', 'POST'])
+def add_service (email):
+  user = User.query.get('michael@gmail.com')
+  users = User.query.filter_by(email='michael@gmail.com')
+  bios = Bio.query.filter_by(email = 'michael@gmail.com')
+  form = ServiceForm()
+  if form.validate_on_submit():
+    serve = Service(email=current_user.email, name=form.name.data, description=form.description.data, meeting=form.meeting.data,available=form.available.data,price=form.price.data)
+    db.session.add(serve)
+    db.session.commit()
+    return redirect (url_for('service', email = current_user.email))
+  return render_template('/add_service.html',title='Add Service', form =form, bios =bios, users = users)
 
 #This is the logout route
 @app.route('/logout', methods=['GET', 'POST'])
