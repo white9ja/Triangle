@@ -388,15 +388,15 @@ def service (email):
 
 @app.route('/add_service/<email>', methods=['GET', 'POST'])
 def add_service (email):
-  user = User.query.get('michael@gmail.com')
-  users = User.query.filter_by(email='michael@gmail.com')
-  bios = Bio.query.filter_by(email = 'michael@gmail.com')
+  user = User.query.get(current_user.email)
+  users = User.query.filter_by(email=current_user.email)
+  bios = Bio.query.filter_by(email = current_user.email)
   form = ServiceForm()
   if form.validate_on_submit():
     serve = Service(email=current_user.email, name=form.name.data, description=form.description.data, meeting=form.meeting.data,available=form.available.data,price=form.price.data)
     db.session.add(serve)
     db.session.commit()
-    return redirect (url_for('service', email = current_user.email))
+    return redirect (url_for('service', bios = bios, email =current_user.email))
   return render_template('/add_service.html',title='Add Service', form =form, bios =bios, users = users)
 
 #This is the logout route

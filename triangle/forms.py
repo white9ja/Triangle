@@ -320,8 +320,8 @@ class ServiceForm(FlaskForm):
             ('AVAILABLE', 'Available'),
             ('NOT-AVAILABLE', 'Not available'),
             ('BOOKED', 'Booked'),
-            ('NEXT-WEEK', 'Available Next-Week'),
-            ('NEXT-MONTH', 'Available Next-Month'),
+            ('AVAILABLE NEXT-WEEK', 'Available Next-Week'),
+            ('AVAILABLE NEXT-MONTH', 'Available Next-Month'),
             ('ONLINE CLASSES ONLY', 'ONLINE CLASSES ONLY'),
         ])
     price = StringField('Month Price', validators=[DataRequired(), Length(min=3, max=10, message=('Please enter a valid or correct price for your service'))])
